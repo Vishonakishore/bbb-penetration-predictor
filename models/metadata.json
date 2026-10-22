@@ -1,0 +1,361 @@
+{
+  "feature_names": [
+    "molecular_weight",
+    "logp",
+    "tpsa",
+    "h_bond_donors",
+    "h_bond_acceptors",
+    "rotatable_bonds",
+    "aromatic_rings",
+    "ring_count",
+    "fraction_csp3",
+    "heavy_atom_count",
+    "formal_charge",
+    "molar_refractivity",
+    "heteroatom_count",
+    "n_aliphatic_rings"
+  ],
+  "descriptor_version": "rdkit-descriptors-v1",
+  "target_labels": {
+    "0": "BBB-non-permeable",
+    "1": "BBB-permeable"
+  },
+  "target_column": "p_np",
+  "target_convention": "MoleculeNet BBBP p_np: 1 = permeable, 0 = non-permeable",
+  "dataset_source": "https://deepchemdata.s3-us-west-1.amazonaws.com/datasets/BBBP.csv",
+  "dataset_retrieved_at": "2026-10-22T12:06:57.729610+00:00",
+  "training_config": {
+    "seed": 42,
+    "test_scaffold_fraction_target": 0.2,
+    "split": "Seeded random 20% of Bemis-Murcko scaffold groups; all acyclic molecules share the empty scaffold group",
+    "cv": "StratifiedKFold on training set only",
+    "random_forest": {
+      "n_estimators": 400,
+      "min_samples_leaf": 2,
+      "class_weight": "balanced"
+    },
+    "logistic_regression": {
+      "max_iter": 2000,
+      "class_weight": "balanced",
+      "scaled": true
+    },
+    "svm": {
+      "kernel": "rbf",
+      "C": 1.0,
+      "class_weight": "balanced",
+      "scaled": true
+    }
+  },
+  "split_stats": {
+    "scaffold_count": 1097,
+    "train_scaffold_count": 878,
+    "test_scaffold_count": 219,
+    "scaffold_overlap_count": 0,
+    "test_scaffold_fraction": 0.19963536918869645,
+    "test_fraction_actual": 0.21323155216284986,
+    "train_class_counts": {
+      "1": 1171,
+      "0": 375
+    },
+    "test_class_counts": {
+      "1": 329,
+      "0": 90
+    },
+    "overall_class_proportions": {
+      "1": 0.7633587786259542,
+      "0": 0.2366412213740458
+    }
+  },
+  "dataset_stats": {
+    "original_rows": 2050,
+    "missing_values": 0,
+    "source": "https://deepchemdata.s3-us-west-1.amazonaws.com/datasets/BBBP.csv",
+    "retrieved_at": "2026-10-22T12:06:57.729610+00:00",
+    "invalid_smiles": 11,
+    "valid_molecules_before_dedup": 2039,
+    "conflicting_duplicate_structures": 10,
+    "duplicate_molecules_removed": 54,
+    "valid_molecules": 1965,
+    "class_distribution": {
+      "0": 465,
+      "1": 1500
+    },
+    "excluded_missing_or_invalid_labels": 0,
+    "descriptor_failures": 0
+  },
+  "test_metrics": {
+    "accuracy": 0.8758949880668258,
+    "precision": 0.918429003021148,
+    "recall": 0.9240121580547113,
+    "f1": 0.9212121212121213,
+    "roc_auc": 0.9048294495103006,
+    "classification_report": {
+      "0": {
+        "precision": 0.7159090909090909,
+        "recall": 0.7,
+        "f1-score": 0.7078651685393258,
+        "support": 90.0
+      },
+      "1": {
+        "precision": 0.918429003021148,
+        "recall": 0.9240121580547113,
+        "f1-score": 0.9212121212121213,
+        "support": 329.0
+      },
+      "accuracy": 0.8758949880668258,
+      "macro avg": {
+        "precision": 0.8171690469651195,
+        "recall": 0.8120060790273556,
+        "f1-score": 0.8145386448757235,
+        "support": 419.0
+      },
+      "weighted avg": {
+        "precision": 0.874928305908773,
+        "recall": 0.8758949880668258,
+        "f1-score": 0.8753858067955305,
+        "support": 419.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        63,
+        27
+      ],
+      [
+        25,
+        304
+      ]
+    ],
+    "test_single_class_limitation": false
+  },
+  "heldout_model_metrics": {
+    "Random Forest": {
+      "accuracy": 0.8758949880668258,
+      "precision": 0.918429003021148,
+      "recall": 0.9240121580547113,
+      "f1": 0.9212121212121213,
+      "roc_auc": 0.9048294495103006,
+      "classification_report": {
+        "0": {
+          "precision": 0.7159090909090909,
+          "recall": 0.7,
+          "f1-score": 0.7078651685393258,
+          "support": 90.0
+        },
+        "1": {
+          "precision": 0.918429003021148,
+          "recall": 0.9240121580547113,
+          "f1-score": 0.9212121212121213,
+          "support": 329.0
+        },
+        "accuracy": 0.8758949880668258,
+        "macro avg": {
+          "precision": 0.8171690469651195,
+          "recall": 0.8120060790273556,
+          "f1-score": 0.8145386448757235,
+          "support": 419.0
+        },
+        "weighted avg": {
+          "precision": 0.874928305908773,
+          "recall": 0.8758949880668258,
+          "f1-score": 0.8753858067955305,
+          "support": 419.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          63,
+          27
+        ],
+        [
+          25,
+          304
+        ]
+      ],
+      "test_single_class_limitation": false
+    },
+    "Logistic Regression": {
+      "accuracy": 0.8281622911694511,
+      "precision": 0.9105431309904153,
+      "recall": 0.8662613981762918,
+      "f1": 0.8878504672897196,
+      "roc_auc": 0.8807835190813915,
+      "classification_report": {
+        "0": {
+          "precision": 0.5849056603773585,
+          "recall": 0.6888888888888889,
+          "f1-score": 0.6326530612244898,
+          "support": 90.0
+        },
+        "1": {
+          "precision": 0.9105431309904153,
+          "recall": 0.8662613981762918,
+          "f1-score": 0.8878504672897196,
+          "support": 329.0
+        },
+        "accuracy": 0.8281622911694511,
+        "macro avg": {
+          "precision": 0.7477243956838868,
+          "recall": 0.7775751435325904,
+          "f1-score": 0.7602517642571047,
+          "support": 419.0
+        },
+        "weighted avg": {
+          "precision": 0.8405971349160117,
+          "recall": 0.8281622911694511,
+          "f1-score": 0.8330347953425342,
+          "support": 419.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          62,
+          28
+        ],
+        [
+          44,
+          285
+        ]
+      ],
+      "test_single_class_limitation": false
+    },
+    "SVM": {
+      "accuracy": 0.8663484486873508,
+      "precision": 0.9278996865203761,
+      "recall": 0.8996960486322189,
+      "f1": 0.9135802469135802,
+      "roc_auc": 0.9112124282337049,
+      "classification_report": {
+        "0": {
+          "precision": 0.67,
+          "recall": 0.7444444444444445,
+          "f1-score": 0.7052631578947368,
+          "support": 90.0
+        },
+        "1": {
+          "precision": 0.9278996865203761,
+          "recall": 0.8996960486322189,
+          "f1-score": 0.9135802469135802,
+          "support": 329.0
+        },
+        "accuracy": 0.8663484486873508,
+        "macro avg": {
+          "precision": 0.798949843260188,
+          "recall": 0.8220702465383316,
+          "f1-score": 0.8094217024041586,
+          "support": 419.0
+        },
+        "weighted avg": {
+          "precision": 0.8725035724706534,
+          "recall": 0.8663484486873508,
+          "f1-score": 0.8688343328045207,
+          "support": 419.0
+        }
+      },
+      "confusion_matrix": [
+        [
+          67,
+          23
+        ],
+        [
+          33,
+          296
+        ]
+      ],
+      "test_single_class_limitation": false
+    }
+  },
+  "cv_results": {
+    "Random Forest": {
+      "accuracy": 0.8531809165883704,
+      "f1": 0.9019774303020217,
+      "roc_auc": 0.8946104382615022
+    },
+    "Logistic Regression": {
+      "accuracy": 0.8143564046351394,
+      "f1": 0.8734418042763051,
+      "roc_auc": 0.8407097047948111
+    },
+    "SVM": {
+      "accuracy": 0.8266624908654349,
+      "f1": 0.882375733570767,
+      "roc_auc": 0.8726157725647088
+    }
+  },
+  "applicability_domain": {
+    "mean": [
+      355.26780918499367,
+      2.3545785122897818,
+      73.91711513583441,
+      1.648124191461837,
+      4.648771021992238,
+      4.2891332470892625,
+      1.446313065976714,
+      3.1358344113842174,
+      0.45013591844406525,
+      24.895860284605433,
+      0.0,
+      95.07486630012939,
+      6.244501940491591,
+      1.6895213454075033
+    ],
+    "scale": [
+      147.5519207974906,
+      2.1161995423047495,
+      60.635053817447044,
+      1.9776532213730673,
+      3.2424938361472084,
+      3.091087785704806,
+      0.9810771018318205,
+      1.458674985236443,
+      0.21639278303049264,
+      10.268649884167358,
+      0.05086572639414619,
+      36.53499913049837,
+      3.939022464159448,
+      1.5061259655781174
+    ],
+    "minimum": [
+      78.11399999999999,
+      -8.424200000000015,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      6.0,
+      -1.0,
+      22.0701,
+      0.0,
+      0.0
+    ],
+    "maximum": [
+      1879.6800000000005,
+      10.056299999999998,
+      662.4100000000001,
+      24.0,
+      33.0,
+      35.0,
+      7.0,
+      16.0,
+      1.0,
+      132.0,
+      1.0,
+      453.16900000000095,
+      44.0,
+      10.0
+    ],
+    "centroid_distance_p95": 5.971189410275138,
+    "interpretation": "Heuristic descriptor-space warning; not a validated applicability-domain test."
+  },
+  "library_versions": {
+    "python": "3.12.14",
+    "scikit_learn": "1.9.1",
+    "rdkit": "2026.09.1",
+    "pandas": "3.1.0",
+    "numpy": "2.5.4",
+    "joblib": "1.6.0"
+  }
+}
