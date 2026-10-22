@@ -1,4 +1,3 @@
-# Native libraries required by RDKit's 2D molecular structure renderer.
 libxrender1
 libxext6
 libsm6
